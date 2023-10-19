@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/registrar" method="post">
+        Descripcion: <br><textarea name="Descripcion" id="" cols="30" rows="10" placeholder="Descripcion"></textarea><br>
+        Precio: <br><input type="number" name="Precio" id=""><br>
+        Existencias: <br><input type="number" name="Existencias" id="">
+        <input type="submit" value="Entrar">
+    </form>
+    <h1>Tabla producto</h1>
+    <table border="1">
+        <tr>
+            <td>Descripcion:</td>
+            <td>Precio:</td>
+            <td>Existencias:</td>
+            <td>IdFab:</td>
+        </tr>
+        <% for(i= 1; i<filas.length; i++){%>
+        <tr>
+            
+            <td><%= filas[i].Descripcion%></td>
+            <td><%= filas[i].Precio%></td>
+            <td><%= filas[i].Existencias%></td>
+            <td><%= filas[i].idFab%></td>
+            <td><a href="modificar?id=<%= filas[i].idFab%>">Modificar</a></td>
+            <td><a href="/eliminar/<%= filas[i].idFab%>">Eliminar</a></td>
+        </tr>
+        <%}%>
+    </table>
+    <h1>Tabla fabrica</h1>
+    <table border="1">
+        <tr>
+            <td>Descripcion:</td>
+            <td>Precio:</td>
+            <td>Existencias:</td>
+            <td>Id:</td>
+        </tr>
+        <% for(i= 1; i<dato.length; i++){%>
+        <tr>
+            
+            <td><%= dato[i].Descripcion%></td>
+            <td><%= dato[i].Precio%></td>
+            <td><%= dato[i].Existencias%></td>
+            <td><%= dato[i].id%></td>
+            <td><a href="modificar?id=<%= dato[i].id%>">Modificar</a></td>
+            <td><a href="/eliminar/<%= dato[i].id%>">Eliminar</a></td>
+        </tr>
+        <%}%>
+    </table>
+    <a href="/login">Ingresar</a>  
+        
+    
+</body>
+</html>

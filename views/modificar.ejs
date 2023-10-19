@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/modificar" method="post">
+        Descripcion: <br><textarea name="Descripcion" id="" cols="30" rows="10" placeholder="Descripcion"><%= fila[0].Descripcion%></textarea><br>
+        Precio: <br><input type="number" name="Precio" value="<%= fila[0].Precio%>"><br>
+        Existencias: <br><input type="number" name="Existencias"value="<%= fila[0].Existencias%>" >
+        <input type="hidden" name="id" value="<%=fila[0].idFab%>">
+        <input type="submit" value="Entrar">
+    </form>
