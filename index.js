@@ -6,6 +6,12 @@ const registro= require('./routes/registro')
 const bodyParser= require('body-parser')
 app.use(bodyParser.json());
 const auth= require('./routes/auth')
+const session= require('express-session')
+app.use(session({
+  secret: 'misecreto', 
+  resave: false,
+  saveUninitialized: true
+}))
 
 app.use(bodyParser.urlencoded({ extended: true }));
 //settings 
@@ -16,7 +22,7 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.listen(2000, ()=>{
   console.log('app running on port 2000')
-  app.get('/', (req, res)=>{
+  app.get('/inicio', (req, res)=>{
     connection.query('SELECT * FROM producto', (err, filas)=>{
       connection.query('SELECT * FROM fabrica', (err, dato)=>{
         if(err) throw err
