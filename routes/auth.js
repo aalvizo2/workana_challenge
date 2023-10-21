@@ -1,7 +1,12 @@
 const express= require('express')
 const Router= express.Router()
 const connection= require('./db')
-
+const session= require('express-session')
+Router.use(session({
+   secret: 'alan', 
+   resave: false, 
+   saveUninitialized: true
+}))
 const jwt = require('jsonwebtoken');
 
 const secretKey= 'mysecret'
@@ -15,15 +20,17 @@ Router.post('/auth', (req, res)=>{
     connection.query('SELECT * FROM usuarios WHERE usuario=? AND pass=?', [usuario, pass], (err, dato)=>{
         if(dato.length >0){
             req.session.name= true
-            req.session.usuario= usuario
+            req.session.name = usuario
             const token = jwt.sign({ id: usuario }, 'alan24', { expiresIn: '1h' })
             console.log(token)
+            console.log(usuario)
             res.redirect('token_auth')
             Router.post('/token_auth', (req, res)=>{
                 const tokenEnviado= req.body.token
                 console.log(tokenEnviado)
                 if(tokenEnviado === token){
                     res.redirect('inicio')
+                    
                 }else{
                     res.render('Error de autenticacion')
                 }
@@ -33,9 +40,11 @@ Router.post('/auth', (req, res)=>{
         }
     })
 })
+
 Router.get('/token_auth', (req, res)=>{
     res.render('token_auth')
 })
 
-
+var usuario= session.usuario
+module.exports= usuario
 module.exports= Router

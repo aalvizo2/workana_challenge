@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+    <%if(usuario){%>
+    <h1><%=usuario%></h1>
+    <%}%>
     <form action="/registrar" method="post">
         Descripcion: <br><textarea name="Descripcion" id="" cols="30" rows="10" placeholder="Descripcion"></textarea><br>
         Precio: <br><input type="number" name="Precio" id=""><br>

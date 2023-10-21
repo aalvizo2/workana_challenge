@@ -8,9 +8,9 @@ app.use(bodyParser.json());
 const auth= require('./routes/auth')
 const session= require('express-session')
 app.use(session({
-  secret: 'misecreto', 
-  resave: false,
-  saveUninitialized: true
+   secret: 'alan', 
+   resave: false, 
+   saveUninitialized: true
 }))
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,10 +23,15 @@ app.set('views', path.join(__dirname, 'views'))
 app.listen(2000, ()=>{
   console.log('app running on port 2000')
   app.get('/inicio', (req, res)=>{
+    const usuario= req.session.usuario 
+    
+    
     connection.query('SELECT * FROM producto', (err, filas)=>{
       connection.query('SELECT * FROM fabrica', (err, dato)=>{
         if(err) throw err
         res.render('inicio', {
+          login: true, 
+          usuario: usuario,
           filas: filas, 
           dato: dato
         })
@@ -34,7 +39,7 @@ app.listen(2000, ()=>{
       console.log(filas)
       
     })
-   
+  
   })
   
   app.use('/', registro)
