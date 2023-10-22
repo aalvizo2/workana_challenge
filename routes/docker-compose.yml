@@ -1,0 +1,7 @@
+mysql-db: 
+  name: productos 
+  table 1: producto
+  table 2: Fabrica
+  table 3: usuario {usuario: alan, pass: alvizo}
+  token: gets on terminal after loggin in you gotta place tokan on token form 
+  
