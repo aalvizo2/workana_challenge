@@ -23,8 +23,10 @@ app.set('views', path.join(__dirname, 'views'))
 app.listen(2000, ()=>{
   console.log('app running on port 2000')
   app.get('/inicio', (req, res)=>{
-    const usuario= req.session.usuario 
-    
+    const usuario= req.session.name 
+    if(!usuario){
+      res.redirect('/')
+    }else{
     
     connection.query('SELECT * FROM producto', (err, filas)=>{
       connection.query('SELECT * FROM fabrica', (err, dato)=>{
@@ -36,9 +38,9 @@ app.listen(2000, ()=>{
           dato: dato
         })
       })
-      console.log(filas)
       
-    })
+      
+    })}
   
   })
   

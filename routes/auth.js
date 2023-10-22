@@ -42,9 +42,20 @@ Router.post('/auth', (req, res)=>{
 })
 
 Router.get('/token_auth', (req, res)=>{
-    res.render('token_auth')
+    const usuario= req.session.name
+    if(!usuario){
+        res.redirect('/')
+    }else{
+    res.render('token_auth', {
+        login:true, 
+        usuario: usuario
+    })}
+})
+Router.get('/logout', (req, res)=>{
+    req.session.destroy()
+    res.redirect('/')
 })
 
-var usuario= session.usuario
+var usuario= session.name
 module.exports= usuario
 module.exports= Router

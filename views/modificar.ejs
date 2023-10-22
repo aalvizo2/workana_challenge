@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    <h1><%= usuario%></h1>
     <form action="/modificar" method="post">
         Descripcion: <br><textarea name="Descripcion" id="" cols="30" rows="10" placeholder="Descripcion"><%= fila[0].Descripcion%></textarea><br>
         Precio: <br><input type="number" name="Precio" value="<%= fila[0].Precio%>"><br>

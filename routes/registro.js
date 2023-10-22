@@ -2,7 +2,7 @@ const express= require('express')
 const Router= express.Router()
 const connection= require('./db');
 const { emitWarning } = require('process');
-
+const login= require('./auth')
 
 Router.post('/registrar', (req, res)=>{
     const {Descripcion, Precio, Existencias}=req.body
@@ -15,18 +15,25 @@ Router.post('/registrar', (req, res)=>{
     })
 });
 Router.get('/modificar',(req, res)=>{
+    const usuario= req.session.name
+    if(!usuario){
+        res.redirect('/')
+    }else{
     const{id}= req.query
     connection.query('SELECT * FROM producto WHERE idFab=?', [id], (err, fila)=>{
         connection.query('SELECT * FROM fabrica WHERE id=?', [id], (err, fila)=>{
             res.render('modificar', {
-                fila: fila
+                fila: fila,
+                login: true, 
+                usuario: usuario
             })
         })
         
-    })
+    })}
     
 })
 Router.post('/modificar', (req, res)=>{
+    
     const{Descripcion}= req.body
     const{Precio}= req.body
     const{Existencias}= req.body
